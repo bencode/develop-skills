@@ -52,7 +52,7 @@
 - 优先使用具名导出，而不是默认导出
 - 不使用 `switch/case`
 - 不使用 `any`
-- 类型导入使用 `import type`
+- 类型导入必须使用 type-only 语法；独立的 `import type { Foo }` 与混合导入中的 `import { type Foo, value }` 均可
 - 禁止通过 `JSON.stringify`、序列化、哈希或字符串拼接等方式构造 React Hook 依赖标识；必须声明真实语义依赖，或者在数据产生处提供稳定引用
 
 ## 异常处理
