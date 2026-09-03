@@ -28,7 +28,7 @@ confidence: high
 ### `scope`
 
 - 跨项目适用的规则使用 `global`
-- 仅在特定项目成立的规则使用项目名，例如 `brain2`、`think-fc2`
+- 仅在特定项目成立的规则使用项目名，例如 `project-a`、`project-b`
 - Session 启动时只加载 `scope: global` 和当前项目 scope 的 memory，不加载其他项目的 memory
 
 | 规则类型 | 推荐 scope |

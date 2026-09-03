@@ -1,0 +1,3 @@
+interface:
+  display_name: "Backend Code Guide"
+  short_description: "Apply backend API, service, and Prisma access conventions"
