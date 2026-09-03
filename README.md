@@ -6,6 +6,8 @@ Version-controlled global engineering rules shared by Codex and Claude Code.
 
 - `rules/AGENTS.md`: shared cross-project engineering rules
 - `rules/CLAUDE.md`: Claude Code-specific skill and memory rules
+- `skills/backend-code-guide/`: opt-in project skill for backend API, service, and Prisma access
+- `skills/frontend-api-docs/`: user skill for repository-aware frontend API integration docs
 - `install.sh`: idempotent macOS/Linux symlink installer
 
 The installer creates these links:
@@ -14,6 +16,8 @@ The installer creates these links:
 ~/.codex/AGENTS.md                         -> rules/AGENTS.md
 ~/.claude/rules/shared-engineering.md      -> rules/AGENTS.md
 ~/.claude/CLAUDE.md                        -> rules/CLAUDE.md
+~/.codex/skills/frontend-api-docs          -> skills/frontend-api-docs
+~/.claude/skills/frontend-api-docs         -> skills/frontend-api-docs
 ```
 
 Codex loads `~/.codex/AGENTS.md` as global guidance. Claude Code loads its global
@@ -36,6 +40,23 @@ the installer with correct links is a no-op.
 When `CODEX_HOME` is set, the Codex link is installed there instead of `~/.codex`. For isolated
 installer verification, set `DEVELOP_SKILLS_TARGET_HOME` to a temporary home directory.
 
+The backend skill is project-specific and is not installed globally. Explicitly enable it for one
+project by passing the project's absolute path:
+
+```sh
+DEVELOP_SKILLS_PROJECT_ROOT=/absolute/path/to/project ./install.sh
+```
+
+This creates both project-local links:
+
+```text
+<project>/.codex/skills/backend-code-guide  -> skills/backend-code-guide
+<project>/.claude/skills/backend-code-guide -> skills/backend-code-guide
+```
+
+Existing targets use the same timestamped backup behavior as the global rule links. Re-running the
+installer with the correct links is a no-op.
+
 ## Update
 
 Pulling this repository updates both tools immediately because the installed files are links:
@@ -55,6 +76,13 @@ Inspect the installed targets:
 readlink ~/.codex/AGENTS.md
 readlink ~/.claude/rules/shared-engineering.md
 readlink ~/.claude/CLAUDE.md
+```
+
+For a project where the backend skill was explicitly enabled, also inspect:
+
+```sh
+readlink /absolute/path/to/project/.codex/skills/backend-code-guide
+readlink /absolute/path/to/project/.claude/skills/backend-code-guide
 ```
 
 In a new Codex session, ask it to summarize its current instructions. In Claude Code, use
