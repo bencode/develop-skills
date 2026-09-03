@@ -6,9 +6,11 @@ script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 shared_source="$script_dir/rules/AGENTS.md"
 claude_source="$script_dir/rules/CLAUDE.md"
 backend_skill_source="$script_dir/skills/backend-code-guide"
+frontend_api_docs_source="$script_dir/skills/frontend-api-docs"
 
 if [ ! -f "$shared_source" ] || [ ! -f "$claude_source" ] || \
-  [ ! -f "$backend_skill_source/SKILL.md" ]; then
+  [ ! -f "$backend_skill_source/SKILL.md" ] || \
+  [ ! -f "$frontend_api_docs_source/SKILL.md" ]; then
   echo 'Managed rule or skill files are missing from the repository.' >&2
   exit 1
 fi
@@ -73,6 +75,8 @@ link_rule() {
 link_rule "$shared_source" "$codex_dir/AGENTS.md"
 link_rule "$shared_source" "$claude_dir/rules/shared-engineering.md"
 link_rule "$claude_source" "$claude_dir/CLAUDE.md"
+link_rule "$frontend_api_docs_source" "$codex_dir/skills/frontend-api-docs"
+link_rule "$frontend_api_docs_source" "$claude_dir/skills/frontend-api-docs"
 
 if [ -n "$project_root" ]; then
   link_rule "$backend_skill_source" "$project_root/.codex/skills/backend-code-guide"

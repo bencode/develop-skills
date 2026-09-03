@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend API Docs"
+  short_description: "Write repository-aware frontend API integration docs"
+  default_prompt: "Use $frontend-api-docs to write a concise API integration guide for a frontend agent."

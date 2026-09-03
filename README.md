@@ -7,6 +7,7 @@ Version-controlled global engineering rules shared by Codex and Claude Code.
 - `rules/AGENTS.md`: shared cross-project engineering rules
 - `rules/CLAUDE.md`: Claude Code-specific skill and memory rules
 - `skills/backend-code-guide/`: opt-in project skill for backend API, service, and Prisma access
+- `skills/frontend-api-docs/`: user skill for repository-aware frontend API integration docs
 - `install.sh`: idempotent macOS/Linux symlink installer
 
 The installer creates these links:
@@ -15,6 +16,8 @@ The installer creates these links:
 ~/.codex/AGENTS.md                         -> rules/AGENTS.md
 ~/.claude/rules/shared-engineering.md      -> rules/AGENTS.md
 ~/.claude/CLAUDE.md                        -> rules/CLAUDE.md
+~/.codex/skills/frontend-api-docs          -> skills/frontend-api-docs
+~/.claude/skills/frontend-api-docs         -> skills/frontend-api-docs
 ```
 
 Codex loads `~/.codex/AGENTS.md` as global guidance. Claude Code loads its global
