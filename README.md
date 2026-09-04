@@ -8,6 +8,7 @@ Version-controlled global engineering rules shared by Codex and Claude Code.
 - `rules/CLAUDE.md`: Claude Code-specific skill and memory rules
 - `skills/backend-code-guide/`: opt-in project skill for backend API, service, and Prisma access
 - `skills/frontend-api-docs/`: user skill for repository-aware frontend API integration docs
+- `skills/iteration-delivery/`: user skill for human-in-the-loop feature delivery
 - `install.sh`: idempotent macOS/Linux symlink installer
 
 The installer creates these links:
@@ -18,6 +19,8 @@ The installer creates these links:
 ~/.claude/CLAUDE.md                        -> rules/CLAUDE.md
 ~/.codex/skills/frontend-api-docs          -> skills/frontend-api-docs
 ~/.claude/skills/frontend-api-docs         -> skills/frontend-api-docs
+~/.codex/skills/iteration-delivery         -> skills/iteration-delivery
+~/.claude/skills/iteration-delivery        -> skills/iteration-delivery
 ```
 
 Codex loads `~/.codex/AGENTS.md` as global guidance. Claude Code loads its global
@@ -76,6 +79,8 @@ Inspect the installed targets:
 readlink ~/.codex/AGENTS.md
 readlink ~/.claude/rules/shared-engineering.md
 readlink ~/.claude/CLAUDE.md
+readlink ~/.codex/skills/iteration-delivery
+readlink ~/.claude/skills/iteration-delivery
 ```
 
 For a project where the backend skill was explicitly enabled, also inspect:
@@ -90,6 +95,13 @@ In a new Codex session, ask it to summarize its current instructions. In Claude 
 
 Project-level instructions are loaded after global instructions and can override them. The shared
 rules therefore require an explicit user confirmation when a project asks to enable Superpowers.
+
+## Iteration delivery
+
+Invoke `$iteration-delivery` in Codex or `/iteration-delivery` in Claude Code when organizing an
+end-to-end feature iteration. It provides a recommended, risk-adjusted path from scope alignment to
+a validated PR while preserving human decisions and authorization boundaries. Codex invocation is
+explicit-only; Claude Code uses the same narrowly scoped skill source.
 
 ## Restore a backup
 

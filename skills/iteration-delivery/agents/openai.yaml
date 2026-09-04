@@ -1,0 +1,7 @@
+interface:
+  display_name: "Iteration Delivery"
+  short_description: "Guide human-in-the-loop feature delivery to PR"
+  default_prompt: "Use $iteration-delivery to organize this feature iteration from scope alignment through validated PR delivery."
+
+policy:
+  allow_implicit_invocation: false
