@@ -125,6 +125,10 @@ checkpoint not applicable when there is no behavior that benefits from manual in
 
 ## Communicate Checkpoints
 
+Use the user's current language for conversation and workflow handoffs unless they request another
+language. Keep code, documentation, commits, Issues, PRs, and other repository artifacts in the
+language required by repository guidance or the artifact's audience.
+
 At a useful pause, report the current checkpoint, confirmed decisions, evidence collected, open
 risks, and the next decision or action. Keep the final handoff self-contained even when intermediate
 updates already covered the details.
