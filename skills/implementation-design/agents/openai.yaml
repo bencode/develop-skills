@@ -1,0 +1,7 @@
+interface:
+  display_name: "Implementation Design"
+  short_description: "Create implementation-ready technical designs"
+  default_prompt: "Use $implementation-design to turn these confirmed requirements into an implementation-ready technical design."
+
+policy:
+  allow_implicit_invocation: true

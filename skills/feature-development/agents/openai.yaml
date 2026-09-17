@@ -1,0 +1,7 @@
+interface:
+  display_name: "Feature Development"
+  short_description: "Guide a feature from requirements to delivery"
+  default_prompt: "Use $feature-development to organize this feature from scope alignment through validated delivery."
+
+policy:
+  allow_implicit_invocation: false

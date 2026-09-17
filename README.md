@@ -8,7 +8,8 @@ Version-controlled global engineering rules shared by Codex and Claude Code.
 - `rules/CLAUDE.md`: Claude Code-specific skill and memory rules
 - `skills/backend-code-guide/`: opt-in project skill for backend API, service, and Prisma access
 - `skills/frontend-api-docs/`: user skill for repository-aware frontend API integration docs
-- `skills/iteration-delivery/`: user skill for human-in-the-loop feature delivery
+- `skills/feature-development/`: explicit user skill for human-in-the-loop feature delivery
+- `skills/implementation-design/`: user skill for implementation-ready technical design
 - `install.sh`: idempotent macOS/Linux symlink installer
 
 The installer creates these links:
@@ -19,8 +20,10 @@ The installer creates these links:
 ~/.claude/CLAUDE.md                        -> rules/CLAUDE.md
 ~/.codex/skills/frontend-api-docs          -> skills/frontend-api-docs
 ~/.claude/skills/frontend-api-docs         -> skills/frontend-api-docs
-~/.codex/skills/iteration-delivery         -> skills/iteration-delivery
-~/.claude/skills/iteration-delivery        -> skills/iteration-delivery
+~/.codex/skills/feature-development        -> skills/feature-development
+~/.claude/skills/feature-development       -> skills/feature-development
+~/.codex/skills/implementation-design      -> skills/implementation-design
+~/.claude/skills/implementation-design     -> skills/implementation-design
 ```
 
 Codex loads `~/.codex/AGENTS.md` as global guidance. Claude Code loads its global
@@ -79,8 +82,10 @@ Inspect the installed targets:
 readlink ~/.codex/AGENTS.md
 readlink ~/.claude/rules/shared-engineering.md
 readlink ~/.claude/CLAUDE.md
-readlink ~/.codex/skills/iteration-delivery
-readlink ~/.claude/skills/iteration-delivery
+readlink ~/.codex/skills/feature-development
+readlink ~/.claude/skills/feature-development
+readlink ~/.codex/skills/implementation-design
+readlink ~/.claude/skills/implementation-design
 ```
 
 For a project where the backend skill was explicitly enabled, also inspect:
@@ -96,12 +101,21 @@ In a new Codex session, ask it to summarize its current instructions. In Claude 
 Project-level instructions are loaded after global instructions and can override them. The shared
 rules therefore require an explicit user confirmation when a project asks to enable Superpowers.
 
-## Iteration delivery
+## Feature development and implementation design
 
-Invoke `$iteration-delivery` in Codex or `/iteration-delivery` in Claude Code when organizing an
-end-to-end feature iteration. It provides a recommended, risk-adjusted path from scope alignment to
-a validated PR while preserving human decisions and authorization boundaries. Codex invocation is
-explicit-only; Claude Code uses the same narrowly scoped skill source.
+Invoke `$feature-development` in Codex or `/feature-development` in Claude Code when organizing an
+end-to-end feature. It provides a recommended, risk-adjusted path from scope alignment to a
+validated delivery while preserving human decisions and authorization boundaries. Its Codex
+invocation remains explicit-only.
+
+`implementation-design` turns confirmed requirements into an implementation-ready technical
+design. It is available for automatic Codex selection on implementation-plan and detailed-design
+requests, and `feature-development` uses it at the Design checkpoint. It defines package and module
+dependencies, software constructs, models, contracts, runtime semantics, validation, and one final
+file-construct tree as the implementation boundary without forcing a repository design document.
+
+The installer removes an obsolete `iteration-delivery` link only when it points to this repository's
+former managed skill path. Files, directories, and links owned elsewhere are preserved.
 
 ## Restore a backup
 

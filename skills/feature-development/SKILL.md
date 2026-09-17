@@ -1,9 +1,9 @@
 ---
-name: iteration-delivery
-description: Guide a human-in-the-loop, GitHub Issue-backed feature iteration from scope alignment through design, implementation, validation, review, and PR. Use when the user explicitly asks to organize or continue an end-to-end delivery iteration; not for standalone explanations, read-only reviews, or PR-only operations.
+name: feature-development
+description: Guide an explicitly requested, human-in-the-loop feature from requirements through design, implementation, validation, review, and delivery. Use when the user asks to organize or continue an end-to-end feature development workflow, including resuming at a later checkpoint; not for standalone design, unrelated one-off implementation, read-only review, or PR-only work.
 ---
 
-# Iteration Delivery
+# Feature Development
 
 Keep a feature moving from intent to validated delivery without turning the work into a rigid state
 machine. Treat the checkpoints below as a recommended path: combine, omit, or revisit them when the
@@ -25,7 +25,7 @@ Use the smallest process that protects the outcome:
 - A local, reversible change with no UI, contract, data, permission, or compatibility impact can
   combine scope and design, use focused validation, and skip independent design or E2E review.
 - New user behavior or work spanning multiple layers usually benefits from separate scope,
-  interaction, detailed-design, implementation, and validation checkpoints.
+  interaction, design, implementation, and validation checkpoints.
 - Schema, payment, permission, security, compatibility, or broad UI work should be split into
   independently deliverable iterations when that reduces review or rollback risk.
 - Production data, authorization, and rollout work also needs the relevant domain safeguards; this
@@ -77,7 +77,7 @@ add a short localized explanation, for example `Requirements (<localized meaning
 
 Establish the goal, audience, current behavior, in-scope and out-of-scope behavior, constraints, and
 observable acceptance criteria. Discuss material ambiguities with the user and reach agreement
-before detailed implementation design.
+before implementation design.
 
 Use brainstorming here to explore product goals, scenarios, and boundaries. Brainstorming is an
 activity within `Requirements`, not a separate checkpoint.
@@ -92,32 +92,31 @@ activity within `Requirements`, not a separate checkpoint.
 
 ### Design
 
-- Trace every actually affected technical layer and name the concrete files to add, modify, or
-  delete. The final file list is the implementation boundary.
-- Specify public contracts, data flow, state and failure semantics, compatibility constraints,
-  migrations or generated outputs, and proportionate test coverage.
-- For compatibility work, enumerate the affected entry points, authentication, requests, status and
-  error semantics, and response shapes instead of treating compatibility as one generic claim.
-- Ask the user to review decisions that affect product behavior or scope. Do not implement while a
-  material decision is unresolved.
+- Enter only after `Requirements` and `Interaction` are confirmed or explicitly not applicable.
+- Use the installed `implementation-design` skill to produce the implementation-ready design.
+- If design exposes a missing or contradictory requirement or interaction decision, return to that
+  checkpoint instead of filling the gap with an implementation assumption.
+- Stop after presenting the design. Do not begin implementation before review and user approval.
 
 ### Review
 
-Use independent reviewers when distinct perspectives add useful confidence. Assign non-overlapping
-lenses such as requirement fit, architecture and ownership, compatibility and security, or testing
-and operability. The lead agent resolves substantive findings, revises the design, and returns
-changed decisions to the user; reviewer votes do not replace that resolution. For a simple change
-or when delegation is unavailable, perform and disclose a structured self-review.
+Review the design against the completion standards in `implementation-design`. Use independent
+reviewers when distinct perspectives add useful confidence, with non-overlapping lenses such as
+architecture and ownership, compatibility and security, or testing and operability. The lead agent
+resolves substantive findings, revises the design, and returns changed decisions to the user;
+reviewer votes do not replace that resolution. For a simple change or when delegation is
+unavailable, perform and disclose a structured self-review.
 
 ### Implementation
 
-- Begin implementation only after the user authorizes the reviewed plan.
+- Begin implementation only after the user authorizes the reviewed design.
 - Default to a dedicated worktree based on the latest target branch. One independently deliverable
   iteration normally maps to one branch, worktree, and PR.
 - Reuse an existing clean, same-scope worktree or the current checkout only when the user requests
   it or repository guidance permits it.
-- Preserve unrelated changes. If implementation requires a file outside the approved boundary,
-  stop, update the design and complete file list, and obtain confirmation before continuing.
+- Preserve unrelated changes. Treat the design's final file-construct tree as the implementation
+  boundary. If implementation requires a file outside it, stop, update and review the affected
+  design, and obtain confirmation before continuing.
 
 ### Validation
 
