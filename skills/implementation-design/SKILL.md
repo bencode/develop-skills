@@ -137,5 +137,18 @@ file boundary.
 Before completing the design, verify that every affected technical layer is represented, all
 construct and dependency relationships close, design-significant models and types are exact, no
 material decision remains unresolved, validation matches the actual risks, and the file-construct
-tree contains every planned write. If implementation later requires an unlisted file or a changed
-contract or dependency, revise and reapprove the design before editing outside the boundary.
+tree contains every planned write.
+
+Include the following execution constraints in the final design:
+
+- During implementation or validation, including unit tests, classify each discovered issue against
+  the confirmed design scope before changing code. Scope covers behavior, contracts, dependencies,
+  and files; an issue in a listed file is not automatically in scope.
+- For out-of-scope issues, record the observed problem, evidence, and impact on the current task.
+  Do not fix them directly or expand scope merely to make tests pass. Prepare a separate design for
+  each such issue and obtain explicit user confirmation before making those changes.
+- If an out-of-scope issue blocks the current task, pause the affected work and explain the blocker;
+  unaffected work may continue.
+- If implementation requires an unlisted file or a contract or dependency change beyond the
+  confirmed design, revise the complete design and file boundary and obtain explicit user
+  confirmation before making the additional changes.
