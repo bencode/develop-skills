@@ -4,6 +4,11 @@
 
 需要进行 Web/React 代码架构和结构审查时，使用 `web-code-review` skill。该 skill 覆盖纯函数提取、Hook 纪律、依赖方向、重构安全和测试策略等高阶原则。
 
+## 代码审查
+
+- **禁用 `/code-review`**：不主动发起，也不建议使用。它要跑数分钟且消耗大量 token（实测一次 6 文件的小型 PR 审查用掉 11 万 token），节奏与成本都不划算
+- 审查代码直接读 diff 自己判断；需要 Web/React 的架构与结构标准时，配合 `web-code-review` skill
+
 ## Memory Schema Extensions
 
 写入 auto memory 的 `user`、`feedback`、`project`、`reference` 四类记录时，除默认 frontmatter 的 `name`、`description`、`type` 外，增加 `scope` 和 `confidence` 字段，并在正文中记录 `Evidence`：
