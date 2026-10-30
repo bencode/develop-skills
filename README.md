@@ -7,6 +7,7 @@ Version-controlled global engineering rules shared by Codex and Claude Code.
 - `rules/AGENTS.md`: shared cross-project engineering rules
 - `rules/CLAUDE.md`: Claude Code-specific skill and memory rules
 - `skills/backend-code-guide/`: opt-in project skill for backend API, service, and Prisma access
+- `skills/frontend-code-guide/`: opt-in project skill for frontend modules, Schema integration, and server state
 - `skills/frontend-api-docs/`: user skill for repository-aware frontend API integration docs
 - `skills/feature-development/`: explicit user skill for human-in-the-loop feature delivery
 - `skills/implementation-design/`: user skill for implementation-ready technical design
@@ -46,18 +47,20 @@ the installer with correct links is a no-op.
 When `CODEX_HOME` is set, the Codex link is installed there instead of `~/.codex`. For isolated
 installer verification, set `DEVELOP_SKILLS_TARGET_HOME` to a temporary home directory.
 
-The backend skill is project-specific and is not installed globally. Explicitly enable it for one
-project by passing the project's absolute path:
+The backend and frontend code guides are project-specific and are not installed globally. Explicitly
+enable them for one project by passing the project's absolute path:
 
 ```sh
 DEVELOP_SKILLS_PROJECT_ROOT=/absolute/path/to/project ./install.sh
 ```
 
-This creates both project-local links:
+This creates the project-local links for both tools:
 
 ```text
 <project>/.codex/skills/backend-code-guide  -> skills/backend-code-guide
 <project>/.claude/skills/backend-code-guide -> skills/backend-code-guide
+<project>/.codex/skills/frontend-code-guide -> skills/frontend-code-guide
+<project>/.claude/skills/frontend-code-guide -> skills/frontend-code-guide
 ```
 
 Existing targets use the same timestamped backup behavior as the global rule links. Re-running the
@@ -88,11 +91,13 @@ readlink ~/.codex/skills/implementation-design
 readlink ~/.claude/skills/implementation-design
 ```
 
-For a project where the backend skill was explicitly enabled, also inspect:
+For a project where the code guides were explicitly enabled, also inspect:
 
 ```sh
 readlink /absolute/path/to/project/.codex/skills/backend-code-guide
 readlink /absolute/path/to/project/.claude/skills/backend-code-guide
+readlink /absolute/path/to/project/.codex/skills/frontend-code-guide
+readlink /absolute/path/to/project/.claude/skills/frontend-code-guide
 ```
 
 In a new Codex session, ask it to summarize its current instructions. In Claude Code, use
@@ -100,6 +105,20 @@ In a new Codex session, ask it to summarize its current instructions. In Claude 
 
 Project-level instructions are loaded after global instructions and can override them. The shared
 rules therefore require an explicit user confirmation when a project asks to enable Superpowers.
+
+## Frontend development
+
+`frontend-code-guide` supports implementation and review: module ownership, shared UI, package
+boundaries, and API/server-state behavior. It follows the project's actual framework and contracts.
+The optional module-boundaries reference distinguishes business ownership from Schema integration;
+its Widget convention applies only where Widget means a Schema entry, not an FSD layer. It contains
+no application-specific profile and does not authorize directory migrations.
+
+`frontend-api-docs` instead writes API integration documents for frontend agents. Use the code guide
+for implementation and the documentation guide for documenting the call path.
+
+Replacing an existing project-local guide preserves it in a timestamped backup and links the
+project to the shared source. Project-specific rules belong in that project's own instructions.
 
 ## Feature development and implementation design
 

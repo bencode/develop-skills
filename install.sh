@@ -6,6 +6,7 @@ script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 shared_source="$script_dir/rules/AGENTS.md"
 claude_source="$script_dir/rules/CLAUDE.md"
 backend_skill_source="$script_dir/skills/backend-code-guide"
+frontend_skill_source="$script_dir/skills/frontend-code-guide"
 frontend_api_docs_source="$script_dir/skills/frontend-api-docs"
 feature_development_source="$script_dir/skills/feature-development"
 implementation_design_source="$script_dir/skills/implementation-design"
@@ -13,6 +14,7 @@ legacy_iteration_delivery_source="$script_dir/skills/iteration-delivery"
 
 if [ ! -f "$shared_source" ] || [ ! -f "$claude_source" ] || \
   [ ! -f "$backend_skill_source/SKILL.md" ] || \
+  [ ! -f "$frontend_skill_source/SKILL.md" ] || \
   [ ! -f "$frontend_api_docs_source/SKILL.md" ] || \
   [ ! -f "$feature_development_source/SKILL.md" ] || \
   [ ! -f "$implementation_design_source/SKILL.md" ]; then
@@ -109,6 +111,8 @@ link_rule "$implementation_design_source" "$claude_dir/skills/implementation-des
 if [ -n "$project_root" ]; then
   link_rule "$backend_skill_source" "$project_root/.codex/skills/backend-code-guide"
   link_rule "$backend_skill_source" "$project_root/.claude/skills/backend-code-guide"
+  link_rule "$frontend_skill_source" "$project_root/.codex/skills/frontend-code-guide"
+  link_rule "$frontend_skill_source" "$project_root/.claude/skills/frontend-code-guide"
 fi
 
 echo 'Installation complete. Start new Codex and Claude Code sessions to load the rules.'
