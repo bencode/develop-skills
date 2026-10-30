@@ -57,6 +57,50 @@ Provide a dedicated package-and-module dependency subsection before construct-le
 - When no cross-package edge changes, still identify the owning module and confirm the dependency
   direction the design preserves.
 
+Open the subsection with an overview tree of the affected directories. Unlike the final boundary
+tree, it may keep unchanged sibling files that explain placement; mark changed files `★` added,
+`✎` modified, `✗` removed, give every listed file a one-line role, and label each subtree with
+`← its role / who shares it`:
+
+```text
+services/feature-x/                 ← rules and data loading (shared by all ends)
+├── rows.ts                         load order-item × employee rows
+└── report.ts           ✎           add store to report rows
+apps/
+├── common/feature-x/schemas.ts  ★  API contract (moved from end-b)
+├── end-a/feature-x/index.ts     ★  end A: optional storeId + HQ permission
+└── end-b/feature-x/schemas.ts   ✗
+```
+
+Draw the graph as plain-text ASCII so it reads in a terminal. When several ends, packages, or layers
+are involved, split it into small graphs by concern (for example UI, client-to-server, server)
+instead of one large graph. Arrows point from dependent to dependency, edge labels name what is
+passed or called, and `← shared: …` marks a node reused by more than one caller. Follow the graphs
+with one sentence confirming the dependency direction against the repository's layering rules.
+
+When the change is about reuse across ends or modules, add a reuse table (layer × shared / end-only
+parts) and name what is deliberately not shared, with the reason. The format looks like this; the
+names are placeholders:
+
+```text
+  end-a/feature-x (hosts: store list)     end-b/feature-x
+             │ loaders + options                 │ loaders
+             └────────────────┬──────────────────┘
+                              ▼
+                 shared-ui/feature-x             ← shared: filters, tables, copy
+
+  end-a/controller     end-b/controller
+             └──────┬──────┘
+                    ▼
+       common/feature-x/schemas                  ← shared: API contract
+                    ▼
+       services/feature-x/report  ──▶  services/feature-x/rows   ← shared: data loading
+```
+
+| Layer | Shared | End A only | End B only |
+|---|---|---|---|
+| UI | component, state, copy | permission guard, loaders | permission guard, loaders, store list |
+
 ## Software Constructs And Dependencies
 
 Describe the software constructs that realize the change: functions, React components, hooks,
