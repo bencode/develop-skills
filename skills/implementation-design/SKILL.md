@@ -41,6 +41,47 @@ constructs and dependencies, implementation sequence, validation design, and the
 implementation boundary. Organize models, contracts, runtime semantics, and conditional concerns
 around the facts actually affected; do not emit empty or not-applicable sections.
 
+## Design Taste: The Zen of Python
+
+Tim Peters (1952–2026) wrote these aphorisms in 1999; they became PEP 20 and `import this`. They are
+not rules to cite but a taste to absorb: when two designs both satisfy the requirements, prefer the
+one these lines would choose.
+
+```text
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
+
+In practice:
+
+- Prefer an explicit call over background machinery. The actor that changes something asks for the
+  effect (run a reload, read a file when its value is needed) instead of the system watching for
+  changes, keeping caches coherent, or inferring intent.
+- Distrust clever mechanisms such as caches, watchers and elaborate data structures when a plain
+  file, a command or a recomputation does the job; they are often advanced and still the worse
+  solution.
+- If explaining a mechanism needs a list of edge cases, look for a design without them.
+- Make failures loud and specific: say what was wrong and how to fix it, and keep the last good state
+  instead of guessing.
+- Give each capability one obvious name and place; group names into namespaces as they grow.
+
 ## Package And Module Dependencies
 
 Provide a dedicated package-and-module dependency subsection before construct-level design.
