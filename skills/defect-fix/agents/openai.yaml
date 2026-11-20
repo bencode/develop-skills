@@ -1,0 +1,7 @@
+interface:
+  display_name: "Defect Fix"
+  short_description: "Fix defects at the root cause with red-green proof"
+  default_prompt: "Use $defect-fix to find where the existing code is wrong and fix this defect."
+
+policy:
+  allow_implicit_invocation: true

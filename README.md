@@ -11,6 +11,7 @@ Version-controlled global engineering rules shared by Codex and Claude Code.
 - `skills/frontend-api-docs/`: user skill for repository-aware frontend API integration docs
 - `skills/feature-development/`: explicit user skill for human-in-the-loop feature delivery
 - `skills/implementation-design/`: user skill for implementation-ready technical design
+- `skills/defect-fix/`: user skill for root-cause defect fixes with red-green proof
 - `install.sh`: idempotent macOS/Linux symlink installer
 
 The installer creates these links:
@@ -25,6 +26,8 @@ The installer creates these links:
 ~/.claude/skills/feature-development       -> skills/feature-development
 ~/.codex/skills/implementation-design      -> skills/implementation-design
 ~/.claude/skills/implementation-design     -> skills/implementation-design
+~/.codex/skills/defect-fix                 -> skills/defect-fix
+~/.claude/skills/defect-fix                -> skills/defect-fix
 ```
 
 Codex loads `~/.codex/AGENTS.md` as global guidance. Claude Code loads its global

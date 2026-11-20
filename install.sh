@@ -10,6 +10,7 @@ frontend_skill_source="$script_dir/skills/frontend-code-guide"
 frontend_api_docs_source="$script_dir/skills/frontend-api-docs"
 feature_development_source="$script_dir/skills/feature-development"
 implementation_design_source="$script_dir/skills/implementation-design"
+defect_fix_source="$script_dir/skills/defect-fix"
 legacy_iteration_delivery_source="$script_dir/skills/iteration-delivery"
 
 if [ ! -f "$shared_source" ] || [ ! -f "$claude_source" ] || \
@@ -17,7 +18,8 @@ if [ ! -f "$shared_source" ] || [ ! -f "$claude_source" ] || \
   [ ! -f "$frontend_skill_source/SKILL.md" ] || \
   [ ! -f "$frontend_api_docs_source/SKILL.md" ] || \
   [ ! -f "$feature_development_source/SKILL.md" ] || \
-  [ ! -f "$implementation_design_source/SKILL.md" ]; then
+  [ ! -f "$implementation_design_source/SKILL.md" ] || \
+  [ ! -f "$defect_fix_source/SKILL.md" ]; then
   echo 'Managed rule or skill files are missing from the repository.' >&2
   exit 1
 fi
@@ -107,6 +109,8 @@ link_rule "$feature_development_source" "$codex_dir/skills/feature-development"
 link_rule "$feature_development_source" "$claude_dir/skills/feature-development"
 link_rule "$implementation_design_source" "$codex_dir/skills/implementation-design"
 link_rule "$implementation_design_source" "$claude_dir/skills/implementation-design"
+link_rule "$defect_fix_source" "$codex_dir/skills/defect-fix"
+link_rule "$defect_fix_source" "$claude_dir/skills/defect-fix"
 
 if [ -n "$project_root" ]; then
   link_rule "$backend_skill_source" "$project_root/.codex/skills/backend-code-guide"
